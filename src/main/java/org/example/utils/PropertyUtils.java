@@ -1,6 +1,6 @@
 package org.example.utils;
 
-import org.example.FrameworkConstants;
+import org.example.constants.FrameworkConstants;
 import org.example.PropertyFileUsageException;
 import org.example.enums.ConfigProperties;
 
