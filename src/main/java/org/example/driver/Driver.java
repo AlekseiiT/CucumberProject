@@ -20,7 +20,7 @@ public final class Driver {
     private Driver() {
     }
 
-    public static void initDriver(String browserType) {
+    public static void initDriver() {
         boolean isHeadlessMode = PropertyUtils.get(ConfigProperties.HEADLESSMODE).equalsIgnoreCase("true");
 
         if (Objects.isNull(DriverManager.getDriver())) {
