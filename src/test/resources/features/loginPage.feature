@@ -4,12 +4,12 @@ Feature: Login functionality for OrangeHRM website
   I want to be able to log in with provided account
   SO that I can access my features and manage my main tasks
 
-  Scenario:
+  Scenario: Valid login
     Given I have entered a valid username and password
     When I click on the login button
     Then I should be logged in successfully
 
-  Scenario Outline:
+  Scenario Outline: Invalid login with parameters
     Given I have entered invalid "<username>" and "<password>"
     When I click on the login button
     Then I should see an error message indicating "<error_message>"

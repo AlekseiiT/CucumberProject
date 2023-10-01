@@ -14,7 +14,7 @@ public class DriverManager {
     /**
      * ThreadLocal variable to deal with thread safety issues
      */
-    private static ThreadLocal<WebDriver> dr = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> dr = new ThreadLocal<>();
 
     /**
      * Getter for the WebDriver

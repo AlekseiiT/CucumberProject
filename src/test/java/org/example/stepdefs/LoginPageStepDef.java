@@ -5,7 +5,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.SneakyThrows;
 import org.example.driver.Driver;
 import org.example.pages.LoginPage;
 import org.example.pages.MainPage;
@@ -13,7 +12,6 @@ import org.example.pages.ResetPasswordPage;
 import org.testng.Assert;
 
 public class LoginPageStepDef {
-    private LoginPage loginPage;
 
     @Before
     public void setup() {
@@ -54,17 +52,13 @@ public class LoginPageStepDef {
         Assert.assertTrue(new LoginPage().isErrorPresent(errorMessage));
     }
 
-    @SneakyThrows
     @When("I click on the Forgot your password? link")
     public void iClickOnTheForgotYourPasswordLink() {
         new LoginPage().clickForgetPassLink();
-        Thread.sleep(1000);
     }
 
-    @SneakyThrows
     @Then("I should be redirected to the password reset page")
     public void iShouldBeRedirectedToThePasswordResetPage() {
         Assert.assertTrue(new ResetPasswordPage().getResetPasswordUrl().contains("auth/requestPasswordResetCode"));
-        Thread.sleep(1000);
     }
 }
