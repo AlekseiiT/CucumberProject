@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.ExplicitWaitFactory;
 import org.example.enums.WaitStrategy;
 import org.openqa.selenium.By;
 
@@ -8,22 +9,28 @@ public class LoginPage extends BasePage {
     private final By passwordInput = By.xpath("//input[@name='password']");
     private final By loginBtn = By.xpath("//button[@type='submit']");
     private final By forgetPassLink = By.xpath("//p[contains(.,'Forgot your password?')]");
+    private final String errorMessage = "//div[@class='orangehrm-login-error']//p[.='%s']";
 
-    public LoginPage enterLogin(String login){
+    public LoginPage enterLogin(String login) {
         sendKeys(loginInput, login, WaitStrategy.PRESENCE, "Логин");
         return this;
     }
 
-    public LoginPage enterPassword(String password){
+    public LoginPage enterPassword(String password) {
         sendKeys(passwordInput, password, WaitStrategy.PRESENCE, "Пароль");
         return this;
     }
 
-    public void clickLoginBtn(){
+    public void clickLoginBtn() {
         click(loginBtn, WaitStrategy.CLICKABLE, "Кнопка login");
     }
 
-    public void clickForgetPassLink(){
+    public void clickForgetPassLink() {
         click(forgetPassLink, WaitStrategy.CLICKABLE, "Ссылка 'Forgot your password?'");
+    }
+
+    public boolean isErrorPresent(String errorName) {
+        By errorMessageBy = By.xpath(String.format(errorMessage, errorName));
+        return ExplicitWaitFactory.performExplicitWait(WaitStrategy.PRESENCE, errorMessageBy).isDisplayed();
     }
 }
