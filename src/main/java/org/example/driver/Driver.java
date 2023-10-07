@@ -24,7 +24,7 @@ public final class Driver {
     }
 
     public static void initDriver() {
-        boolean isHeadlessMode = PropertyUtils.get(ConfigProperties.HEADLESSMODE).equalsIgnoreCase("true");
+        boolean isHeadlessMode = PropertyUtils.getProperty(ConfigProperties.HEADLESSMODE).equalsIgnoreCase("true");
 
         if (Objects.isNull(DriverManager.getDriver())) {
             ProxyManager.createProxy();
@@ -47,7 +47,7 @@ public final class Driver {
             if (isHeadlessMode)
                 DriverManager.getDriver().manage().window().setSize(new Dimension(1280, 720));
 
-            DriverManager.getDriver().get(PropertyUtils.get(ConfigProperties.URL));
+            DriverManager.getDriver().get(PropertyUtils.getProperty(ConfigProperties.URL));
             browserMobProxy.newHar("requestHistory");
         }
     }

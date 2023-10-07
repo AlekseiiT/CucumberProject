@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import lombok.SneakyThrows;
 import org.example.factories.ExplicitWaitFactory;
 import org.example.enums.WaitStrategy;
 import org.openqa.selenium.By;
@@ -21,8 +22,10 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @SneakyThrows
     public void clickLoginBtn() {
         click(loginBtn, WaitStrategy.CLICKABLE, "Кнопка login");
+        Thread.sleep(2000);
     }
 
     public void clickForgetPassLink() {

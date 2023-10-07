@@ -43,7 +43,6 @@ public class LoginPageStepDef {
     @When("I click on the login button")
     public void iClickOnTheLoginButton() {
         new LoginPage().clickLoginBtn();
-        Thread.sleep(2000);
     }
 
     @Then("I should be logged in successfully")
@@ -82,6 +81,6 @@ public class LoginPageStepDef {
             if (pair.getName().contains("Cookie"))
                 PropertyUtils.setProperty(ConfigProperties.APITOKEN, pair.getValue());
         }
-        Assert.assertTrue(PropertyUtils.get(ConfigProperties.APITOKEN).contains("orangehrm"));
+        Assert.assertTrue(PropertyUtils.getProperty(ConfigProperties.APITOKEN).contains("orangehrm"));
     }
 }
