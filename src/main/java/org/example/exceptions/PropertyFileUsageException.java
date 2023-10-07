@@ -1,4 +1,4 @@
-package org.example;
+package org.example.exceptions;
 
 public class PropertyFileUsageException extends RuntimeException{
     public PropertyFileUsageException(String message) {

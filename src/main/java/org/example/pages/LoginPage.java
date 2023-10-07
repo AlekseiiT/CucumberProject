@@ -1,6 +1,6 @@
 package org.example.pages;
 
-import org.example.ExplicitWaitFactory;
+import org.example.factories.ExplicitWaitFactory;
 import org.example.enums.WaitStrategy;
 import org.openqa.selenium.By;
 
