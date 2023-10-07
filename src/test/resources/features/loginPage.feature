@@ -4,6 +4,11 @@ Feature: Login functionality for OrangeHRM website
   I want to be able to log in with provided account
   SO that I can access my features and manage my main tasks
 
+  Scenario: Get api token
+    Given I have entered a valid username and password
+    When I click on the login button
+    Then I get api token
+
   Scenario: Valid login
     Given I have entered a valid username and password
     When I click on the login button

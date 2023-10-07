@@ -41,4 +41,8 @@ public class PropertyUtils {
         }
         return CONFIG_MAP.get(key.name().toLowerCase());
     }
+
+    public static void setProperty(ConfigProperties configProperties, String value){
+        CONFIG_MAP.put(configProperties.name().toLowerCase(), String.valueOf(value));
+    }
 }

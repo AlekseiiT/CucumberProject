@@ -5,11 +5,20 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.SneakyThrows;
+import net.lightbody.bmp.core.har.Har;
+import net.lightbody.bmp.core.har.HarNameValuePair;
 import org.example.driver.Driver;
+import org.example.driver.ProxyManager;
+import org.example.enums.ConfigProperties;
 import org.example.pages.LoginPage;
 import org.example.pages.MainPage;
 import org.example.pages.ResetPasswordPage;
+import org.example.utils.PropertyUtils;
 import org.testng.Assert;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoginPageStepDef {
 
@@ -30,9 +39,11 @@ public class LoginPageStepDef {
                 .enterPassword("admin123");
     }
 
+    @SneakyThrows
     @When("I click on the login button")
     public void iClickOnTheLoginButton() {
         new LoginPage().clickLoginBtn();
+        Thread.sleep(2000);
     }
 
     @Then("I should be logged in successfully")
@@ -60,5 +71,17 @@ public class LoginPageStepDef {
     @Then("I should be redirected to the password reset page")
     public void iShouldBeRedirectedToThePasswordResetPage() {
         Assert.assertTrue(new ResetPasswordPage().getResetPasswordUrl().contains("auth/requestPasswordResetCode"));
+    }
+
+    @Then("I get api token")
+    public void iGetApiToken() {
+        Har har = ProxyManager.getProxy().getHar();
+        List<HarNameValuePair> messages = har.getLog().getEntries().stream().filter(e -> e.getRequest().getUrl().contains("messages")).collect(Collectors.toList()).get(0).getRequest().getHeaders();
+
+        for (HarNameValuePair pair : messages) {
+            if (pair.getName().contains("Cookie"))
+                PropertyUtils.setProperty(ConfigProperties.APITOKEN, pair.getValue());
+        }
+        Assert.assertTrue(PropertyUtils.get(ConfigProperties.APITOKEN).contains("orangehrm"));
     }
 }
