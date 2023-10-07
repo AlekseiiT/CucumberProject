@@ -35,7 +35,7 @@ public class PropertyUtils {
         }
     }
 
-    public static String get(ConfigProperties key){
+    public static String getProperty(ConfigProperties key){
         if (Objects.isNull(CONFIG_MAP.get(key.name().toLowerCase()))){
             throw new PropertyFileUsageException("Property name " + key + " is not found. Please check config.properties");
         }
@@ -44,5 +44,9 @@ public class PropertyUtils {
 
     public static void setProperty(ConfigProperties configProperties, String value){
         CONFIG_MAP.put(configProperties.name().toLowerCase(), String.valueOf(value));
+    }
+
+    public static boolean hasProperty(ConfigProperties configProperties){
+        return CONFIG_MAP.containsKey(configProperties.name().toLowerCase());
     }
 }
