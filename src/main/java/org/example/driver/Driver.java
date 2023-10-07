@@ -1,9 +1,12 @@
 package org.example.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.client.ClientUtil;
 import org.example.enums.ConfigProperties;
 import org.example.utils.PropertyUtils;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -24,8 +27,14 @@ public final class Driver {
         boolean isHeadlessMode = PropertyUtils.get(ConfigProperties.HEADLESSMODE).equalsIgnoreCase("true");
 
         if (Objects.isNull(DriverManager.getDriver())) {
+            ProxyManager.createProxy();
+            BrowserMobProxy browserMobProxy = ProxyManager.getProxy();
+            Proxy seleniumProxy = ClientUtil.createSeleniumProxy(browserMobProxy);
+
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--disable-web-security");
+            options.setProxy(seleniumProxy);
 
             if (isHeadlessMode)
                 options.addArguments("--headless");
@@ -39,6 +48,7 @@ public final class Driver {
                 DriverManager.getDriver().manage().window().setSize(new Dimension(1280, 720));
 
             DriverManager.getDriver().get(PropertyUtils.get(ConfigProperties.URL));
+            browserMobProxy.newHar("requestHistory");
         }
     }
 
@@ -49,6 +59,7 @@ public final class Driver {
         if (Objects.nonNull(DriverManager.getDriver())) {
             DriverManager.getDriver().quit();
             DriverManager.unload();
+            ProxyManager.unload();
         }
     }
 }
