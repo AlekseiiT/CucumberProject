@@ -4,9 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.example.api.ApiManager;
-import org.example.api.PojoWrapper;
-import org.example.api.pojos.subunit.RootSubunit;
-import org.testng.Assert;
+import org.example.assertWrapper.SubunitResponseAssert;
 
 public class SubunitStepDef {
     Response response;
@@ -18,9 +16,13 @@ public class SubunitStepDef {
 
     @Then("I check their values")
     public void iCheckTheirValues() {
-        System.out.println(response.getBody().prettyPrint());
-
-        RootSubunit pojo = (RootSubunit) PojoWrapper.getPojoFromJsonString(response.asString(), RootSubunit.class);
-        Assert.assertTrue(true);
+        SubunitResponseAssert.assertThat(response)
+                .statusCodeIs(200)
+                .metaOtherEmployeeCount(0)
+                .metaSubunitCount(6)
+                .metaUnassignedEmployeeCount(18)
+                .dataCount(1)
+                .subunitPresent("Engineering")
+                .assertAll();
     }
 }
