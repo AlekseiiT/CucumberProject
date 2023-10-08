@@ -11,8 +11,14 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+/**
+ * FrameworkLogger is used to control loggin to console and extentReport file
+ */
 public final class FrameworkLogger {
 
+    /**
+     * Private constructor
+     */
     private FrameworkLogger() {
     }
 
@@ -30,11 +36,19 @@ public final class FrameworkLogger {
         MAP.put(LogType.LOG_REPORT_CONSOLE, LOG_REPORT_CONSOLE);
     }
 
+    /**
+     * is used for logging with different combinations
+     * @param status where to log a message
+     * @param message message to log
+     */
     public static void log(LogType status, String message) {
         MAP.get(status).accept(message);
     }
 
-
+    /**
+     * Make screenshot and log message
+     * @param message message to log
+     */
     public static void logWithScreenshot(String message){
         if (PropertyUtils.getProperty(ConfigProperties.PASSEDSTEPSCREENSHOTS).equalsIgnoreCase("yes")){
             ExtentManager.getTest()

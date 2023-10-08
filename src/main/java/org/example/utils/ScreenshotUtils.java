@@ -8,15 +8,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * ScreenshotUtils class is used to make screenshots for future logging to report
+ */
 public final class ScreenshotUtils {
 
-    private ScreenshotUtils(){}
+    private ScreenshotUtils() {
+    }
 
     public static byte[] getScreenshot() {
         File screenshot = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
 
         try {
-            return  Files.readAllBytes(screenshot.toPath());
+            return Files.readAllBytes(screenshot.toPath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

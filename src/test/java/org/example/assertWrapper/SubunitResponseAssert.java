@@ -5,8 +5,11 @@ import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.SoftAssertions;
 import org.example.api.PojoWrapper;
 import org.example.api.pojos.subunit.RootSubunit;
+import org.example.enums.LogType;
 
 import java.util.Objects;
+
+import static org.example.reports.FrameworkLogger.log;
 
 public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert, Response> {
 
@@ -37,6 +40,7 @@ public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert,
         int statusCode = actual.statusCode();
         softAssertions.assertThat(statusCode)
                 .isEqualTo(expectedStatusCode);
+        log(LogType.LOG_REPORT_CONSOLE, "Проверка статус кода. Ожидаем: " + expectedStatusCode + " . Факт: " + statusCode);
         return this;
     }
 
@@ -45,6 +49,7 @@ public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert,
         softAssertions.assertThat(totalSubunitCount)
                 .as("metaSubunitCount")
                 .isEqualTo(value);
+        log(LogType.LOG_REPORT_CONSOLE, "Проверка metaSubunitCount. Ожидаем: " + value + " . Факт: " + totalSubunitCount);
         return this;
     }
 
@@ -53,6 +58,7 @@ public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert,
         softAssertions.assertThat(otherEmployeeCount)
                 .as("otherEmployeeCount")
                 .isEqualTo(value);
+        log(LogType.LOG_REPORT_CONSOLE, "Проверка otherEmployeeCount. Ожидаем: " + value + " . Факт: " + otherEmployeeCount);
         return this;
     }
 
@@ -61,6 +67,7 @@ public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert,
         softAssertions.assertThat(unassignedEmployeeCount)
                 .as("metaUnassignedEmployeeCount")
                 .isEqualTo(value);
+        log(LogType.LOG_REPORT_CONSOLE, "Проверка unassignedEmployeeCount. Ожидаем: " + value + " . Факт: " + unassignedEmployeeCount);
         return this;
     }
 
@@ -69,6 +76,7 @@ public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert,
         softAssertions.assertThat(totalSubunitCount)
                 .as("dataCount")
                 .isEqualTo(value);
+        log(LogType.LOG_REPORT_CONSOLE, "Проверка totalSubunitCount. Ожидаем: " + value + " . Факт: " + totalSubunitCount);
         return this;
     }
 
@@ -77,6 +85,7 @@ public class SubunitResponseAssert extends AbstractAssert<SubunitResponseAssert,
         softAssertions.assertThat(count)
                 .as("subunitName " + subunitName + " in data")
                 .isEqualTo(1);
+        log(LogType.LOG_REPORT_CONSOLE, "Проверка кол-ва " + subunitName + " в списке. Ожидаем: 1. " + " . Факт: " + count);
         return this;
     }
 }
