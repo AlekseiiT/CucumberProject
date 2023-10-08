@@ -42,13 +42,13 @@ public final class BaseRequestSpecification {
      * @return Api token
      */
     public static String getToken() {
-        Driver.initDriver();
-        new LoginPage()
-                .enterLogin("Admin")
-                .enterPassword("admin123")
-                .clickLoginBtn();
-
         if (!PropertyUtils.hasProperty(ConfigProperties.APITOKEN)) {
+            Driver.initDriver();
+            new LoginPage()
+                    .enterLogin("Admin")
+                    .enterPassword("admin123")
+                    .clickLoginBtn();
+
             Har har = ProxyManager.getProxy().getHar();
             List<HarNameValuePair> messages = har.getLog().getEntries().stream().filter(e -> e.getRequest().getUrl().contains("messages")).collect(Collectors.toList()).get(0).getRequest().getHeaders();
 
