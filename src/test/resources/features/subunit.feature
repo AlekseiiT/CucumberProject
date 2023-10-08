@@ -1,4 +1,4 @@
-Feature: Login functionality for OrangeHRM website
+Feature: Subunit check
 
   As a user of the OrangeHRM website
   I want to be able to check available subunits
