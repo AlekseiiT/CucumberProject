@@ -12,12 +12,14 @@ public class PojoWrapper {
     /**
      * Private constructor
      */
-    private PojoWrapper(){}
+    private PojoWrapper() {
+    }
 
     /**
      * Generates pojo class out of jsonString
-     * @param jsonString
-     * @param clazz
+     *
+     * @param jsonString input value for mapping
+     * @param clazz      pojo root class
      * @return Object class should be cast manually after returning
      */
     @SneakyThrows

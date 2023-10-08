@@ -35,7 +35,7 @@ public final class BaseRequestSpecification {
                 .enterPassword("admin123")
                 .clickLoginBtn();
 
-        if (!PropertyUtils.hasProperty(ConfigProperties.APITOKEN)){
+        if (!PropertyUtils.hasProperty(ConfigProperties.APITOKEN)) {
             Har har = ProxyManager.getProxy().getHar();
             List<HarNameValuePair> messages = har.getLog().getEntries().stream().filter(e -> e.getRequest().getUrl().contains("messages")).collect(Collectors.toList()).get(0).getRequest().getHeaders();
 

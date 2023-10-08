@@ -11,7 +11,9 @@ public class ProxyManager {
     /**
      * Private constructor
      */
-    public ProxyManager(){}
+    public ProxyManager() {
+    }
+
     /**
      * ThreadLocal variable to deal with thread safety issues
      */
@@ -19,6 +21,7 @@ public class ProxyManager {
 
     /**
      * Getter for Proxy
+     *
      * @return WebDriver instance
      */
     public static BrowserMobProxy getProxy() {
@@ -28,7 +31,7 @@ public class ProxyManager {
     /**
      * Setter for Proxy
      */
-    public static void createProxy(){
+    public static void createProxy() {
         BrowserMobProxyServer proxyServer = new BrowserMobProxyServer();
         proxyServer.setTrustAllServers(true);
         proxyServer.enableHarCaptureTypes(CaptureType.REQUEST_HEADERS, CaptureType.RESPONSE_HEADERS);
@@ -39,7 +42,7 @@ public class ProxyManager {
     /**
      * Unloads threadLocal variable
      */
-    public static void unload(){
+    public static void unload() {
         proxy.remove();
     }
 }

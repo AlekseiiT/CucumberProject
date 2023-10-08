@@ -10,7 +10,9 @@ public class DriverManager {
     /**
      * Private constructor
      */
-    private DriverManager(){}
+    private DriverManager() {
+    }
+
     /**
      * ThreadLocal variable to deal with thread safety issues
      */
@@ -18,6 +20,7 @@ public class DriverManager {
 
     /**
      * Getter for the WebDriver
+     *
      * @return WebDriver instance
      */
     public static WebDriver getDriver() {
@@ -26,16 +29,17 @@ public class DriverManager {
 
     /**
      * Setter for WebDriver
+     *
      * @param driverref webDriver referense from {@link Driver} class
      */
-    public static void setDriver(WebDriver driverref){
+    public static void setDriver(WebDriver driverref) {
         dr.set(driverref);
     }
 
     /**
      * Unloads threadLocal variable
      */
-    public static void unload(){
+    public static void unload() {
         dr.remove();
     }
 }

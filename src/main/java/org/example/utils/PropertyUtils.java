@@ -35,18 +35,18 @@ public class PropertyUtils {
         }
     }
 
-    public static String getProperty(ConfigProperties key){
-        if (Objects.isNull(CONFIG_MAP.get(key.name().toLowerCase()))){
+    public static String getProperty(ConfigProperties key) {
+        if (Objects.isNull(CONFIG_MAP.get(key.name().toLowerCase()))) {
             throw new PropertyFileUsageException("Property name " + key + " is not found. Please check config.properties");
         }
         return CONFIG_MAP.get(key.name().toLowerCase());
     }
 
-    public static void setProperty(ConfigProperties configProperties, String value){
+    public static void setProperty(ConfigProperties configProperties, String value) {
         CONFIG_MAP.put(configProperties.name().toLowerCase(), String.valueOf(value));
     }
 
-    public static boolean hasProperty(ConfigProperties configProperties){
+    public static boolean hasProperty(ConfigProperties configProperties) {
         return CONFIG_MAP.containsKey(configProperties.name().toLowerCase());
     }
 }
