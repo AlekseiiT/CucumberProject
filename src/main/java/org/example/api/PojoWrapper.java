@@ -27,4 +27,10 @@ public class PojoWrapper {
         return new ObjectMapper()
                 .readValue(jsonString, clazz);
     }
+
+    @SneakyThrows
+    public static String toString(Object obj) {
+        return new ObjectMapper()
+                .writeValueAsString(obj);
+    }
 }
