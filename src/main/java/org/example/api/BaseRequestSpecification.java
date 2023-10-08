@@ -15,11 +15,19 @@ import java.util.stream.Collectors;
 
 public final class BaseRequestSpecification {
 
+    /**
+     * Private constructor
+     */
     private BaseRequestSpecification() {
     }
 
     private static final String BASE_URL = ApiRoutes.getBaseUrl();
 
+    /**
+     * Method creates request template with base_url and authentication token
+     *
+     * @return RequestSpecification
+     */
     public static RequestSpecification getBaseRequestSpecification() {
         String token = BaseRequestSpecification.getToken();
 
@@ -28,6 +36,11 @@ public final class BaseRequestSpecification {
                 .baseUri(BASE_URL);
     }
 
+    /**
+     * Method retrieves api token from UI Proxy
+     *
+     * @return Api token
+     */
     public static String getToken() {
         Driver.initDriver();
         new LoginPage()
@@ -45,7 +58,6 @@ public final class BaseRequestSpecification {
             }
             Driver.quitDriver();
         }
-        System.out.println(PropertyUtils.getProperty(ConfigProperties.APITOKEN));
         return PropertyUtils.getProperty(ConfigProperties.APITOKEN);
     }
 

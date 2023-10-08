@@ -19,10 +19,15 @@ import java.util.Objects;
  */
 
 public final class Driver {
-
+    /**
+     * Private constructor
+     */
     private Driver() {
     }
 
+    /**
+     * This driver is called to initiate WebDriver
+     */
     public static void initDriver() {
         boolean isHeadlessMode = PropertyUtils.getProperty(ConfigProperties.HEADLESSMODE).equalsIgnoreCase("true");
 

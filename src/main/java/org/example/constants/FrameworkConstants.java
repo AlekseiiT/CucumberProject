@@ -16,7 +16,7 @@ public class FrameworkConstants {
     private static final int EXPLICIT_WAIT = 10;
 
     /**
-     * Getter for property config path
+     * Getter for a property config path
      *
      * @return property config path
      */

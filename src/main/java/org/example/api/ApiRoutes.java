@@ -4,8 +4,14 @@ import lombok.Getter;
 import org.example.enums.ConfigProperties;
 import org.example.utils.PropertyUtils;
 
+/**
+ * ApiRouts class is used to store API endpoints
+ */
 public final class ApiRoutes {
 
+    /**
+     * Private constructor
+     */
     private ApiRoutes() {
     }
 

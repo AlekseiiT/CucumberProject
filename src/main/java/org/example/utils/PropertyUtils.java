@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
- * PropertyUtils is used to get config values from config file in form of map
+ * PropertyUtils is used to get config values from config file in the form of map
  */
 public class PropertyUtils {
 
