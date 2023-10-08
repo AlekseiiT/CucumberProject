@@ -24,9 +24,7 @@ public class PropertyUtils {
 
     static {
         try (FileInputStream file = new FileInputStream(FrameworkConstants.getConfigfilepath())) {
-
             property.load(file);
-            //converting to HashMap
             property.forEach((key, value) -> CONFIG_MAP.put(String.valueOf(key), String.valueOf(value)));
 
         } catch (IOException e) {
