@@ -32,19 +32,17 @@ public class ExplicitWaitFactory {
      */
     public static WebElement performExplicitWait(WaitStrategy waitStrategy, By by) {
 
-        WebElement element = null;
+        WebElement element;
 
-        if (waitStrategy == WaitStrategy.CLICKABLE) {
-            element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstants.getExplicitWait()))
+        switch (waitStrategy) {
+            case CLICKABLE -> element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstants.getExplicitWait()))
                     .until(ExpectedConditions.elementToBeClickable(by));
-        } else if (waitStrategy == WaitStrategy.PRESENCE) {
-            element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstants.getExplicitWait()))
+            case PRESENCE -> element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstants.getExplicitWait()))
                     .until(ExpectedConditions.presenceOfElementLocated(by));
-        } else if (waitStrategy == WaitStrategy.VISIBLE) {
-            element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstants.getExplicitWait()))
+            case VISIBLE -> element = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(FrameworkConstants.getExplicitWait()))
                     .until(ExpectedConditions.visibilityOfElementLocated(by));
-        } else if (waitStrategy == WaitStrategy.NONE) {
-            element = DriverManager.getDriver().findElement(by);
+            case NONE -> element = DriverManager.getDriver().findElement(by);
+            default -> throw new IllegalArgumentException("Invalid wait strategy: " + waitStrategy);
         }
         return element;
     }
