@@ -2,6 +2,7 @@ package org.example.stepdefs;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,6 +15,7 @@ import org.example.enums.ConfigProperties;
 import org.example.pages.LoginPage;
 import org.example.pages.MainPage;
 import org.example.pages.ResetPasswordPage;
+import org.example.reports.ExtentManager;
 import org.example.utils.PropertyUtils;
 import org.testng.Assert;
 
@@ -23,13 +25,18 @@ import java.util.stream.Collectors;
 public class LoginPageStepDef {
 
     @Before
-    public void setup() {
-        Driver.initDriver();
+    public void setup(Scenario scenario) {
+        ExtentManager.setTest(scenario);
+        if (scenario.getSourceTagNames().contains("@UiScenario")){
+            Driver.initDriver();
+        }
     }
 
     @After
-    public void tearDown() {
-        Driver.quitDriver();
+    public void tearDown(Scenario scenario) {
+        if (scenario.getSourceTagNames().contains("@UiScenario")){
+            Driver.quitDriver();
+        }
     }
 
     @Given("I have entered a valid username and password")
