@@ -10,10 +10,9 @@ ____
 - Test runner - TestNG
 - UI - Selenium
 - API - Rest Assured, Jackson
-- Репорт - extend reports with cucumber adapter plugin
+- Репорт - Extend reports с плагином Сucumber adapter
 - Логирование - slf4j, Logback
 - Assertins - AssertJ<br/>
-  
 
 ### Основные концепты:
 
